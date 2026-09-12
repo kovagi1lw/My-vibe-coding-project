@@ -4,25 +4,30 @@
 
 ## Scenario
 
-_Which of the four scenarios (or your own, instructor-approved) did you build?_
+_Tick the scenario you built in Lab 1 (the same one you selected in the lab guide), or name your own._
 
-_____
+- [ ] Scenario 01 · The Retention Engine
+- [ ] Scenario 02 · The Internal Tool Nobody Uses
+- [ ] Scenario 03 · The Marketplace Trust Problem
+- [x] Scenario 04 · The Dashboard Nobody Reads
+- [ ] My own (instructor-approved): _____
 
 ## Launch path
 
-- [ ] Copy & Customize (start from a scenario starter prompt)
-- [ ] First Screen Method (build only the very first screen the user sees)
+- [x] Copy & Customize (started from a scenario starter prompt)
+- [ ] First Screen Method (built only the very first screen the user sees)
 
 ## The build
 
-- **What I built:** _____
-- **Tool used:** Lovable / v0 / Cursor / Bolt / Replit
-- **Shareable link:** _____
+- **What I built:** A single page dashboard built around one question, how  is user adoption doing right now.
+- **Tool used:** lovable
+- **Shareable link:** https://sharp-focus-data.lovable.app
 
 ## Show & Swap read
 
-_What a partner understood from your build with no verbal setup. Their reaction is your first piece of product evidence._
+_What a partner understood from your build with no verbal setup, their reaction is your first piece of product evidence._
 
-- **What they thought it did:** _____
-- **What surprised them:** _____
-- **The gap between what I intended and what they read:** _____
+- **What they understood immediately:** Report that I'm seeing that talks about the adoption rate , the percentage, recommendation how to improve it  , signs up
+- **What confused them:** although report looks clean, it is confusing, not super clear on the purpose of this report
+- **The assumption they thought you were testing:** mainly to understand the adoption, how to improve it.
+- **The gap between what you intended and what they read:** It is not helping to understand that this is the dashboard to support my product, showing only key info but can provide even more
