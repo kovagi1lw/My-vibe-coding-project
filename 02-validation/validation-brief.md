@@ -4,22 +4,22 @@
 
 ## Scenario
 
-_____
+Scenario 04 · The Dashboard Nobody Reads
 
 ## Riskiest assumption
 
 _The one belief that, if false, sinks the idea._
 
-_____
+The data is all there, but users can't find the most important one and related insight, so they bounce.
 
 ## Hypothesis
 
-> We believe **[change]** will cause **[outcome]** for **[user]**. We'll know we're right when **[signal]**.
+> We believe **a first screen that leads with one headline metric, a plain-language takeaway, and one recommended action** will cause **users act on the dashboard, deep dive in details  instead of bouncing** for **the people who should act on it and present the reasoning for action to LT**. We'll know we're right when **bounce rate drops and the recommended action gets clicked**.
 
 ## Risk type
 
-- [ ] Value (do they want it?)
-- [ ] Usability (can they use it?)
+- [x] Value (do they want it?)
+- [x] Usability (can they use it?)
 - [ ] Feasibility (can we build it?)
 - [ ] Viability (should we?)
 
@@ -27,10 +27,18 @@ _____
 
 _The result that would make you stop or pivot._
 
-_____
+If a guided headline + recommended action still bounces, the metric itself may not be the most relevant one, pivot.
 
 ## The three ingredients
 
-- **Real data (domain metrics):** _____
-- **User voice (verbatim quotes):** _____
+- **Real data (domain metrics):**
+  - 60%, Bounce rate: sessions under 15s with no interaction.
+  - 12, Charts on the default landing view.
+  - 6 clicks, To reach the most-requested metric.
+  - 1.3, Avg. weekly sessions / active user.
+- **User voice (verbatim quotes):**
+  - "The number I need is in there, but it takes six clicks and three filters to find it.", Growth analyst
+  - "It tells me *what* happened but never *what to do about it*. I still export to a spreadsheet to think.", Product lead
+  - "I open it, see twelve charts, and have no idea which one I'm supposed to act on. So I close it.", Marketing manager
 - **Hypothesis (above):** ✓
+
