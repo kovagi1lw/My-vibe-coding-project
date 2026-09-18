@@ -10,11 +10,11 @@ Scenario 04 · The Dashboard Nobody Reads
 
 _The one belief that, if false, sinks the idea._
 
-The data is all there, but users can't find the most important one and related insight, so they bounce.
+The data is all there, but users can't find the insight, so they bounce.
 
 ## Hypothesis
 
-> We believe **a first screen that leads with one headline metric, a plain-language takeaway, and one recommended action** will cause **users act on the dashboard, deep dive in details  instead of bouncing** for **the people who should act on it and present the reasoning for action to LT**. We'll know we're right when **bounce rate drops and the recommended action gets clicked**.
+> We believe **a first screen that leads with one headline metric, a plain-language takeaway, and one recommended action** will cause **users act on the dashboard instead of bouncing** for **the people who should make decisions from it**. We'll know we're right when **bounce rate drops and the recommended action gets clicked**.
 
 ## Risk type
 
@@ -27,18 +27,18 @@ The data is all there, but users can't find the most important one and related i
 
 _The result that would make you stop or pivot._
 
-If a guided headline + recommended action still bounces, the metric itself may not be the most relevant one, pivot.
+If a guided headline + action still bounces, the metric itself may be wrong, pivot.
 
 ## The three ingredients
 
 - **Real data (domain metrics):**
   - 60%, Bounce rate: sessions under 15s with no interaction.
-  - 12, Charts on the default landing view.
   - 6 clicks, To reach the most-requested metric.
   - 1.3, Avg. weekly sessions / active user.
+  - 12, Charts on the default landing view.
 - **User voice (verbatim quotes):**
+  - "I open it, see twelve charts, and have no idea which one I'm supposed to act on. So I close it.", Marketing manager
   - "The number I need is in there, but it takes six clicks and three filters to find it.", Growth analyst
   - "It tells me *what* happened but never *what to do about it*. I still export to a spreadsheet to think.", Product lead
-  - "I open it, see twelve charts, and have no idea which one I'm supposed to act on. So I close it.", Marketing manager
 - **Hypothesis (above):** ✓
 
