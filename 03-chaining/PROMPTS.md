@@ -6,7 +6,7 @@
 
 _Each prompt is a reusable step. Chain them: the output of one becomes the input to the next._
 
-## Prompt chain: [name your flow]
+## Prompt chain: DASHBOARD HARDENING
 
 ### Step 1: Expand, build new screens in a strict sequence
 ```
