@@ -8,12 +8,12 @@ A page with main metric and actionable suggestion, with option to drill down on 
 
 ## What my partner understood (in their words)
 
-The hypothesis is that replacing a traditional 12-chart analytics dashboard with a guided, opinionated view — one metric, one insight, one recommended action — will get decision-makers to actually do something instead of bouncing within 15 seconds. The kill switch is on the Experiment readout tab: if bounce rate doesn't drop below 45% and action click rate doesn't clear 20% after ~32 completed sessions, the guided approach isn't working.
+he trials arriving from paid search reach the invite screen, but abandon it at twice the rate of other acquisition channels. Northstar Labs is going to monitor 7-day trial activations and test optional invite deferral and clearer context on why inviting a teammate matters to increase team invites to increase invites.
 
 ## Where they got confused / pushed back
 
-The "+6.8 pts activation" upside estimate feels too precise for a prototype — there's no visible methodology behind it, so it reads more like a made-up number than a data-backed projection. The recommended action ("fix the teammate invite step for paid-search trials") jumps to a root cause that the dashboard itself doesn't actually prove; the chart just shows a declining trend, not a funnel breakdown by acquisition source. That gap between "here's a number going down" and "here's exactly what to fix" is where the guided experience risks losing credibility — it's the moment the user would ask "how do you know that?" and the prototype doesn't answer.
+When I viewed the experiment report and saw the user voice quotes I wasn’t sure if this project was for the internal tool nobody uses (low level of team invites) or a dashboard nobody reads because the quotes focused on issues like “It tells me what happened but never what to do about it. I still export to a spreadsheet to think.”
 
 ## What I'll change as a result
 
-show the funnel breakdown that justifies the recommended action. Right now the dashboard says "fix the teammate invite step for paid-search trials" but only shows a declining line chart — there's nothing connecting that trend to the invite step or to paid search specifically. Adding even a simple horizontal funnel (workspace created → teammate invited → activated) split by acquisition source would close the credibility gap and make the "recommended action" feel earned rather than asserted.
+Reframe the experiment readout to make the product context unmistakable — add a one-liner at the top that names what the guided screen replaces (e.g. "Replacing the default 12-chart analytics landing for trial workspaces") and swap or annotate the user quotes so they clearly describe the before-state of that specific screen, not a generic dashboard complaint.
