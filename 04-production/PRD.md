@@ -3,151 +3,115 @@
 > Module 4 · Production Specs. Refactor for readability; extract a living PRD that stays true as the build evolves.
 
 ## Problem
- 
-The default analytics landing for trial workspaces shows twelve charts and no next step. The people who should make decisions from it leave without acting. Baseline behavior measured on that screen: 60% bounce rate, 6 clicks to reach the key metric, 1.3 weekly sessions per active user, and 12 charts on the default view.
- 
-For the purposes of this PRD the hypothesis is treated as verified: a guided first screen that leads with one headline metric, one plain-language takeaway, and one recommended action causes decision-makers to act instead of bounce.
- 
-## Hypothesis
- 
-A first screen leading with one headline metric, a plain-language takeaway, and one recommended action will cause users to act on the dashboard instead of bouncing, for the people who should make decisions from it.
- 
-### Success criteria
- 
-* Bounce rate on the guided screen falls below 45%.
-* Recommended-action clicks exceed 20% of sessions.
-* Minimum sample before declaring success or failure: 30 completed sessions.
- 
-## Users & jobs
- 
-**Primary user**: The person accountable for trial activation, typically a growth lead. They own the activation target and must decide what to ship this week.
- 
-**Decision-making audience quoted in the readout**:
- 
-* Marketing manager
-* Growth analyst
-* Product lead
- 
-**Job to be done**: On opening the dashboard, know in seconds whether activation is on track and what single action to take this week.
 
+_What user problem does this solve? Tie to the validated hypothesis._
+
+Trial workspaces land on a default analytics screen with 12 charts. Baseline usage of that screen is poor: 60% bounce, 6 clicks per session, 1.3 weekly sessions. The research quotes (marketing manager, growth analyst, product lead) say the same thing: the screen shows everything and tells no one what to do.
+
+Hypothesis under test: a first screen that leads with one headline metric, a one-sentence takeaway and one recommended action will make users act instead of bounce. Success means bounce below 45% and recommended-action click rate above 20%, measured over at least 30 completed sessions.
+
+Round 2 pivot: round 1 used "7-day trial activation rate" as the headline metric. Round 2 replaces it with an urgency metric, "Trials expiring in 72 hours with no activation" (23, +5 vs. last week). The recommended action is "Triage the 8 paid-search trials closest to expiry".
+
+Where the evidence stands (honest status): collection started Sep 24, 2026. There are 27 completed sessions so far, 3 short of the 30-session minimum, so the readout says Insufficient data. Interim values meet both targets: bounce is 37.0% (10 of 27) and the action click rate is 22.2% (6 of 27). The hypothesis is therefore not yet validated. It is trending toward validation. Even after 30 sessions, the result is a threshold check against a historical baseline, not a controlled comparison. There is no concurrent control group and the traffic is not verified production users, so no causal lift can be claimed.
+
+## Users & jobs
+
+- **Primary user:** a growth or product decision-maker responsible for trial-to-paid conversion.
+- **Supporting roles:**
+  - **Marketing manager:** wants to know which acquisition channel's trials are at risk. Paid search is the flagged segment.
+  - **Growth analyst:** needs the trend and a segment breakdown to trust the headline.
+  - **Product lead:** needs a trackable follow-up that turns the insight into owned work.
+- **Job to be done:** "When I open the dashboard, tell me what's at risk right now and the one thing to do about it this week, so I can act without reading 12 charts."
 
 ## Scope
 
-### In scope
- 
-* Guided overview with one headline metric and its trend.
-* Insight-to-action block directly beneath the headline metric.
-* Recommendation screen with reason, impact, steps, and a create-follow-up action.
-* Follow-up screen to review a planned follow-up's details.
-* Experiment readout with intro, loading, empty, error, and ready states.
-* Anonymous activity measurement for sessions and events.
-* Compact left navigation rail plus top navigation strip.
- 
-### Out of scope (explicitly excluded)
- 
-* Multi-metric analytics beyond the single headline metric.
-* Accounts, permissions, or role-based access.
-* A true A/B split against the old twelve-chart screen.
-* Notifications, email, or push alerts.
-* Editing, assigning, or scheduling follow-ups after creation.
-* Analytics, Experiments, Audiences, and Settings menu destinations — kept in the rail as disabled placeholders only.
-* Any integration with external analytics, CRM, or ad platforms.
-* Persisted follow-up records beyond the current browser session.
+- **In:**
+  - **Guided overview:** headline metric (23, red "+5 vs. last week"), "What this means" insight card, one recommended action with "Estimated save: 3–4 activations this week", and "Review recommended action" button.
+  - **Clickable headline:** the label and the value smooth-scroll to the metric drill-down.
+  - **13-week count trend chart:** Y-axis 0–30, dashed "Target: Below 10" line, value labels on first/last/hovered points, clicking a point selects that week in the drill-down.
+  - **Metric drill-down:** segments (All trials / Paid search / Organic), range control, per-week detail, target "< 10 per week".
+  - **Recommended-action detail screen:** segment, estimated save, three evidence lines, one "Create follow-up" button with inline confirmation.
+  - **Follow-ups list:** title, segment, date, status (newest first). Empty state: "No follow-ups yet — review a recommended action to create one." Always reachable from the left rail.
+  - **Post-follow-up behavior:** overview button reads "Follow-up created" and opens /follow-ups instead of the detail screen.
+  - **Left navigation:** Overview, Experiments, and Follow-ups are active. Audiences and Settings are muted (40% opacity) with "Coming soon" tooltip and no click action.
+  - **Experiment readout:** live aggregates, automatic decision state, three-state target cards, baseline comparison, before-state quotes, current session card.
+  - **Tracking-failure notice:** dismissible toast if an activity event fails to send. No retry.
+
+- **Out (explicitly):**
+  - Real product data for the headline metric, the trend, or the segments.
+  - User accounts, permissions, or teams.
+  - Editing follow-ups, assigning owners, or changing their status.
+  - A/B assignment or a control group.
+  - Audiences and Settings screens.
+  - Notifications and integrations (CRM, email).
+  - Multiple recommendations or ranking of recommendations.
 
 ## Requirements
- 
-| # | Requirement | Priority | Acceptance Criteria |
+
+| # | Requirement | Priority | Acceptance criteria |
 |---|---|---|---|
-| 1 | Single headline metric above the fold | P0 | One dominant metric (7-day trial activation) visible without scrolling on 1280 and 390 viewports; 13-week trend line beneath/beside metric; no competing charts |
-| 2 | Plain-language takeaway with one primary action | P0 | Takeaway explains metric in one sentence; exactly one filled primary action button ("Review recommended action"); no secondary CTAs |
-| 3 | Recommendation screen limited to reason, steps, and one CTA | P0 | Opens at `/recommendation` with unique title/description in head(); displays headline, impact, confidence, reason, 2–3 steps, "Create follow-up" button; no overview chart or baseline stats |
-| 4 | Follow-up creation and detail screen | P0 | Creating follow-up navigates to `/follow-up` and records event; screen shows title, owner, due date, recommendation link, status, metric, target, checklist; empty state with recommendation link when none exists |
-| 5 | Persistent follow-up entry point on the overview | P0 | Overview displays "Planned follow-up" card with title, owner, due date, status, "Review" link when one exists; shows "No follow-up planned" with recommendation link otherwise; survives navigation within session |
-| 6 | Live experiment readout with thresholds and automatic decision state | P0 | Reads real anonymous sessions; computes bounce rate, action-click rate, average duration; renders: "Insufficient data" (< 30 sessions), "Continue" (bounce < 45% AND clicks > 20%), or "Pivot headline metric" |
-| 7 | Intro state before first load | P0 | Opens with intro panel explaining measurements, thresholds, and minimum sample; "Load live activity" action triggers first read; numbers and decision panel hidden until result returns |
-| 8 | Empty state for zero sessions | P0 | When load succeeds with no sessions, shows single "No data available" panel; explains measurements appear after first session; no em dash, 0%, or decision wording |
-| 9 | Three distinct endpoint failure states with retry and last-known figures | P0 | Distinguishes network, service error, and timeout with plain-language messages and retry; failed reads preserve previous numbers marked "last known"; 8-second timeout prevents hanging |
-| 10 | Disabled menu items for pages that do not exist | P0 | Analytics, Experiments, Audiences, Settings in left rail are non-interactive; muted styling, no hover, not focusable, marked `aria-disabled`; tooltip reads "Not available in this prototype" |
-| 11 | 75ms hover and interaction feedback | P0 | All main-area buttons, tabs, links, cards transition ~75ms on hover/focus; keyboard focus visible and distinct; reduced-motion sets transitions to 0ms |
-| 12 | Mobile 390 and desktop 1280 without overflow | P0 | Overview, recommendation, follow-up screens render without horizontal overflow at 1280×1800 and 390×844; compact rail collapses to icons on mobile; top nav usable on both sizes |
-| 13 | Chart week selection storing state | P1 | Clicking week in trend line selects it and reveals detail panel; selection stored in component state during session; state resets on hard refresh |
-| 14 | Range and segment filters wired to real data | P1 | Range (Last 13 weeks / Last 4 weeks) and segment (All trials / Paid search) selectors exist; send values to activity tracking; headline metric still uses mocked 13-week series |
-| 15 | Richer error telemetry | P1 | Recording failures logged to console with context (status, count, paused); client reports distinct error kinds (network, service, timeout); no PII in user-facing messages |
-| 16 | A control group for the readout | P1 | Readout can tag sessions as guided vs. default-landing; aggregation query supports filtering by group; UI copy acknowledges control comparison status |
-| 17 | Notifications when a follow-up is due | P1 | Due-soon follow-up surfaces subtle indicator on rail icon; computed from follow-up due date in session state; no email or push notifications |
-| 18 | Exporting the readout | P2 | Future release: add button to export readout as image or PDF |
-| 19 | Saved views | P2 | Future release: persist selected range/segment per user |
-| 20 | User accounts and editable recommendations | P2 | Future release: allow signed-in users to edit recommendations and persist follow-ups per user |
+| R1 | Headline, takeaway, and action appear in the first viewport | Must | At 1333×937 and 390×844, the metric value, first insight sentence, and action button are visible without scrolling |
+| R2 | Headline links to the drill-down | Should | Clicking the label or the value scrolls smoothly to the drill-down. Pointer cursor and "Explore ↓" arrow are visible |
+| R3 | Trend chart gives context | Should | Title "Expiring-without-activation count — 13-week trend". Y-axis 0–30 labelled every 5. Dashed target line at 10 labelled "Target: Below 10". Labels on first, last, and hovered points only |
+| R4 | Chart points drill down | Should | Clicking a point, or pressing Enter/Space on it, selects that week in the drill-down and scrolls to it |
+| R5 | Recommended-action detail | Must | Shows the triage title, "Paid-search trials" segment, "3–4 activations this week", and three evidence lines |
+| R6 | Create follow-up | Must | One click stores one follow-up titled "Triage the 8 paid-search trials closest to expiry" with inline confirmation. Repeat clicks create no duplicates |
+| R7 | A follow-up counts as an action click | Must | Client sends `recommended_action_clicked` before `follow_up_created`. Server sets the clicked flag whenever `follow_up_created` arrives. No session can have a follow-up without a click |
+| R8 | No repeat creation from the overview | Should | Once a follow-up exists this session, the overview button opens /follow-ups, not the detail screen |
+| R9 | Follow-ups list | Must | Lists title, segment, date, and status (newest first). When empty, shows exactly "No follow-ups yet — review a recommended action to create one." |
+| R10 | Readout loading state | Must | First load shows placeholder bars, never 0 or NaN. Background refreshes every 15s keep current numbers visible with no placeholder or flicker |
+| R11 | Zero-session state | Must | With 0 completed sessions, shows exactly "No sessions recorded yet — share the dashboard link to start collecting data." Decision and checkpoint rows are hidden |
+| R12 | Decision states | Must | Under 30 sessions: "Insufficient data". At 30+ with bounce < 45% and clicks > 20%: green "Continue — guided screen is working". At 30+ otherwise: red "Pivot the headline metric" |
+| R13 | Target cards (interim progress) | Should | 0 sessions: gray "No data". 1–29 sessions: amber "[value] · n of 30 sessions". 30+: green "Passing" or red "Failed · [value]". Applies to both bounce and action click cards |
+| R14 | Realistic session length | Must | Duration counted only while page is visible. Each session capped at 1,800s when stored and when averaged |
+| R15 | Bounce definition | Must | A bounce is a completed session under 15 seconds with no meaningful interaction |
+| R16 | Tracking-failure notice | Should | A failed event POST shows "Activity tracking interrupted — your interactions may not be recorded." Dismissible. No retry |
+| R17 | Unavailable navigation is clear | Could | Audiences and Settings show at 40% opacity with "Coming soon" tooltip. No click action |
+| R18 | Privacy | Must | No names, emails, IP addresses, or free text are stored. Public summary returns aggregate numbers only |
 
 ## Data & events
- 
-### Real and persisted
- 
-Anonymous session rows and event rows are stored in Lovable Cloud.
- 
-#### Session fields
- 
-* `session_id` (uuid, primary key)
-* `started_at` (timestamptz)
-* `last_seen_at` (timestamptz)
-* `ended_at` (timestamptz, nullable)
-* `duration_seconds` (integer)
-* `meaningful_interaction` (boolean)
-* `recommended_action_clicked` (boolean)
-* `follow_up_created` (boolean)
- 
-#### Event fields
- 
-* `event_id` (uuid, primary key)
-* `session_id` (uuid, foreign key)
-* `event_name` (text, constrained to allowed values)
-* `event_value` (text, nullable, max 80 chars)
-* `occurred_at` (timestamptz)
- 
-#### Events recorded
- 
-* `session_start`
-* `heartbeat` (every 10 seconds while active)
-* `session_end` (on `visibilitychange` hidden or `pagehide`)
-* `view_changed` (tab switches)
-* `metric_selected`
-* `chart_point_selected`
-* `range_changed`
-* `segment_changed`
-* `recommended_action_clicked`
-* `follow_up_created`
- 
-#### Ingestion behavior
- 
-* Validates an allowed event list.
-* Rejects cross-origin calls with 403.
-* Caps events per session at 200; returns 429 when the cap is reached.
-* De-duplicates inserts by ignoring PostgreSQL `23505` unique-violation errors.
-* Idempotently upserts the session row on every event.
- 
-#### Aggregates read back by the experiment readout
- 
-* Total sessions, completed sessions, engaged sessions, bounced sessions, action-click sessions, follow-up sessions.
-* Bounce rate (`bounced / completed`).
-* Action click rate (`clicked / total sessions`).
-* Average duration among completed sessions.
-* Collection start date.
- 
-### Mocked or hand-written
- 
-* The 46.2% activation figure and its 13-week series.
-* All supporting-metric series and targets in the baseline block.
-* The recommendation content: headline, impact (+6.8 pts), affected trials (1,284), evidence rows, steps, owner, due date.
-* Range and segment selectors: presentation only; selecting them does not change the displayed headline metric or trend.
-* The follow-up record: currently stored in browser `sessionStorage`, not the database.
-* The company identity, avatar, and the three quotes in the readout.
- 
+
+_What gets stored, what gets tracked._
+
+**Real, live, and stored:**
+
+- **Anonymous sessions:** a random ID per browser tab, kept in session storage with version `_v2` for round 2.
+- **Events:** sent to `POST /api/public/dashboard-activity`. Each event is validated. The endpoint accepts same-origin requests only and at most 200 events per session. Duplicate event IDs are ignored.
+- **Allowed events:** `session_start`, `heartbeat`, `session_end`, `view_changed`, `metric_selected`, `chart_point_selected`, `range_changed`, `segment_changed`, `recommended_action_clicked`, `follow_up_created`.
+- **Meaningful interaction:** any event except `heartbeat`, `session_end`, and `session_start`.
+- **Completed session:** has a `session_end` event, or no activity for 20 seconds or more. All aggregates use completed sessions only.
+- **Formulas:**
+  - Bounce rate = bounced ÷ completed
+  - Action click rate = sessions with a click ÷ completed
+  - Avg. session = mean of min(duration, 1800s)
+  - Engaged = completed sessions with a meaningful interaction
+- **Follow-up records:** stored durably with title, owner "Growth team", status "Planned", due label "Next experiment cycle", and segment. All reads and writes happen on the server. The public cannot access the table directly.
+
+**Current round (Sep 24, 2026):**
+
+| Measure | Value |
+|---|---|
+| Completed sessions | 27 |
+| Engaged | 15 |
+| Bounced | 10 (37.0%) |
+| Action-click sessions | 6 (22.2%) |
+| Follow-up sessions | 7 |
+| Avg. session | ≈363s |
+| Follow-up records (all rounds) | 29 |
+
+Note: one session was recorded with a follow-up before R7 was fixed, so it has a follow-up but no click. That is why follow-up sessions (7) exceed click sessions (6).
+
+**Mocked or static:** the headline value 23 and "+5 vs. last week" change, the 13-week counts (12→23), segment and range values in the drill-down, the "8 paid-search trials" and "3–4 activations" estimated save and evidence lines, the baseline figures (60% bounce, 6 clicks, 1.3 weekly sessions, 12 charts), the three research quotes (rewritten for the before-state), and the current session card (reads from browser state, not the server).
+
 ## Open questions
- 
-* Thresholds and minimum sample are not yet agreed with stakeholders.
-* There is no control group, so how the kill switch is judged remains unresolved.
-* Whether activation is the right headline metric for every decision-maker role.
-* Follow-up persistence and ownership beyond the current browser session.
-* Retention period for anonymous activity data.
-* Whether the recommendation should be generated from data rather than authored.
-* What the four disabled menu areas (Analytics, Experiments, Audiences, Settings) should become if the prototype advances.
+
+1. **Control group:** should the next round randomly show the old 12-chart screen to some visitors, so a causal lift can be measured?
+2. **Who counts:** traffic so far is mostly reviewers of the prototype. Who are the target participants, and how will they be recruited or verified?
+3. **Source of the headline metric:** which system of record would supply "trials expiring in 72 hours with no activation", and how often does it refresh?
+4. **Round comparison:** should round 1 (activation-rate headline) be kept and compared with round 2? Round 1 data was cleared at the reset.
+5. **The 30-session minimum:** is it enough? What confidence level is needed before choosing Continue or Pivot?
+6. **Follow-up ownership:** who owns each follow-up, how does its status progress, and should duplicates across sessions be merged?
+7. **Recommendations:** how is the one recommendation chosen, and who approves the estimated-impact figures?
+8. **Data retention:** how long should anonymous session and event data be kept?
+9. **Security:** several security findings were left outside earlier fixes. Who triages them before any real rollout?
+10. **Pre-fix session:** should the session recorded before the R7 fix be backfilled as a click, or left as is?
