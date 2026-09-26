@@ -6,7 +6,7 @@
 
 _The working, shareable link that survives real users._
 
-https://insight-to-do-v2.lovable.app/
+https://insight-to-do.lovable.app/
 
 ## Data schema
 
@@ -75,11 +75,12 @@ _Who can see / do what? Where are the auth boundaries?_
 | **Failure / offline: switching experiments while sessions are open** | Open sessions counted toward the wrong experiment | Sessions are stamped with `experiment_id` at creation. A round change only affects new sessions |
 | **Failure / offline: clock skew or sessions > 30 minutes** | Duration could accumulate indefinitely (10,000s+ observed) | Duration counted only while `document.visibilityState === "visible"`. Capped at 1,800s on both write and aggregation |
 | **Failure / offline: sendBeacon fails on page close** | Session might never finalize | Sessions without `session_end` auto-finalize after 20s inactivity in the aggregation query |
+| **Failure / offline: full internet drop** | Only the activity tracking toast fired — user had no idea the whole app was offline | A persistent red bar appears across the top of every page: "You're offline — check your internet connection." with a Reconnect button. Bar stays until connectivity is restored. Activity tracking toast still fires independently for individual POST failures |
+
 
 ## Stress test results
 
-_What you threw at it, and what held / broke._
-
-_____
+- Offline state: Activity tracking interrupted  is popping up in toast, but the retry option is not showing up.
+- Spam click was not allowed, after second click warning that I need to come back for account creation after 58 secs.
 
 
