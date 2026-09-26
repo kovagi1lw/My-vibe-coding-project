@@ -2,13 +2,15 @@
 
 > Module 6 · Evals & Iteration. Read the analytics, run an iteration sprint, present with evidence.
 
-## What the analytics say
+## What the evidence says
 
-_The numbers from real usage. Put the metric that matters on screen._
+_What real usage showed: numbers if your tool has analytics, counted behaviour if it does not. Put the signal that matters on screen._
 
-- **Primary metric:** _____
-- **What moved:** _____
-- **What didn't:** _____
+- **Primary signal:** all pages were visited, mainly from desktop
+- **What moved:** With login feature the visits dropped, prior that had direct visits.
+- **What didn't:** bounce rate decreased with login.
+
+_Analytics snapshot: visitors 21; page views 166; views per visit 7.9; duration 6m24s; bounce 29%._
 
 ## Iteration sprint
 
@@ -18,7 +20,7 @@ _The numbers from real usage. Put the metric that matters on screen._
 
 ## Peer feedback
 
-_____
+When I initially logged in with Google, nothing loaded. When I revisited the screen by opening it. second time in Slack it opened just fine.
 
 ## The recommendation
 
@@ -27,6 +29,12 @@ _____
 _The evidence that justifies the call:_
 
 _____
+
+## Final showcase
+
+- **Demo link:** _____
+- **The one-sentence story:** _____
+- **Where it landed on the Confidence Line (M2 → now):** _____
 
 ## Final showcase
 
