@@ -12,6 +12,8 @@ _What real usage showed: numbers if your tool has analytics, counted behaviour i
 
 _Analytics snapshot: visitors 21; page views 166; views per visit 7.9; duration 6m24s; bounce 29%._
 
+_Observed behaviour: reach 1; core action 22.7%; stall point Follow-up; explained away none; own first run 2._
+
 ## Iteration sprint
 
 | Change | Hypothesis | Result |
@@ -29,12 +31,6 @@ When I initially logged in with Google, nothing loaded. When I revisited the scr
 _The evidence that justifies the call:_
 
 _____
-
-## Final showcase
-
-- **Demo link:** _____
-- **The one-sentence story:** _____
-- **Where it landed on the Confidence Line (M2 → now):** _____
 
 ## Final showcase
 
