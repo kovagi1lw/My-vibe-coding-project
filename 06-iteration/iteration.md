@@ -19,7 +19,7 @@ _Observed behaviour: reach 1; core action 22.7%; stall point Follow-up; explaine
 | Fix first-login blank screen — wait for profile creation trigger + core data before rendering; show "Setting up your workspace…" skeleton after 3s instead of white screen | First-time Google sign-in visitors are bouncing because nothing loads; fixing this removes the #1 drop-off point before the guided screen | Ran prompt 1. First Google login now shows a loading skeleton and resolves to the guided overview within seconds instead of a blank page |
 
 ## Peer feedback
-
+- When I initially logged in with Google, nothing loaded. When I revisited the screen by opening it. second time in Slack it opened just fine.
 _____
 
 ## The recommendation
