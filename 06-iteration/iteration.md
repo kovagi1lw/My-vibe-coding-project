@@ -10,6 +10,8 @@ _What real usage showed: numbers if your tool has analytics, counted behaviour i
 - **What moved:** The round 2 urgency metric ("Trials expiring in 72 hours with no activation") drove action where the round 1 abstract metric ("7-day trial activation rate") did not. Round 1 stalled at 56% bounce and 17% clicks after 116 sessions — both failing. Same layout, different metric, completely different result. The pivot was the right call.
 - **What didn't:** Auth friction is eating visits before they become sessions. Lovable analytics shows 11 visits generating 56 page views, with /auth as the most-visited page (8 hits). The 57% bounce rate in Lovable analytics (which includes auth-wall bounces) is much higher than the 42.4% in the experiment readout (which only counts completed sessions past auth). Peer feedback confirmed: first Google login rendered a blank screen.
 
+_Analytics snapshot: visitors 11; page views 56; views per visit 5.09; duration 48s; bounce 57%._
+
 _Observed behaviour: reach 1; core action 22.7%; stall point Follow-up; explained away none; own first run 2._
 
 ## Iteration sprint
@@ -19,8 +21,18 @@ _Observed behaviour: reach 1; core action 22.7%; stall point Follow-up; explaine
 | Fix first-login blank screen — wait for profile creation trigger + core data before rendering; show "Setting up your workspace…" skeleton after 3s instead of white screen | First-time Google sign-in visitors are bouncing because nothing loads; fixing this removes the #1 drop-off point before the guided screen | Ran prompt 1. First Google login now shows a loading skeleton and resolves to the guided overview within seconds instead of a blank page |
 
 ## Peer feedback
-- When I initially logged in with Google, nothing loaded. When I revisited the screen by opening it. second time in Slack it opened just fine.
-_____
+
+-When I initially logged in with Google, nothing loaded. When I revisited the screen by opening it. second time in Slack it opened just fine.
+
+## Iteration sprint
+
+| Change | Hypothesis | Result |
+|---|---|---|
+| Fix first-login blank screen — wait for profile creation trigger + core data before rendering; show "Setting up your workspace…" skeleton after 3s instead of white screen | First-time Google sign-in visitors are bouncing because nothing loads; fixing this removes the #1 drop-off point before the guided screen | Ran prompt 1. First Google login now shows a loading skeleton and resolves to the guided overview within seconds instead of a blank page |
+
+## Peer feedback
+
+When I initially logged in with Google, nothing loaded. When I revisited the screen by opening it. second time in Slack it opened just fine.
 
 ## The recommendation
 
